@@ -84,39 +84,39 @@ def app():
     # Add scientific calculator functions
     st.write("Scientific functions:")
     col1, col2, col3 = st.columns(3)
-   with col1:
-    result = None  # Initialize the result variable
-    try:
-        if st.button("sin"):
-            result = trigonometry(num1, "sin")
-        if result is not None:
-            st.write(f"The sine of {num1} is:", result)
-    except Exception as e:
-        st.error(str(e))
+    with col1:
+     result = None  # Initialize the result variable
+     try:
+         if st.button("sin"):
+             result = trigonometry(num1, "sin")
+         if result is not None:
+             st.write(f"The sine of {num1} is:", result)
+     except Exception as e:
+         st.error(str(e))
+ 
+    with col2:
+     result = None  # Initialize the result variable
+     try:
+         if st.button("tan"):
+             result = trigonometry(num1, "tan")
+         if st.button("sqrt"):
+             result = square_root(num1)
+         if result is not None:
+             st.write(f"The result is:", result)
+     except Exception as e:
+         st.error(str(e))
 
-   with col2:
-    result = None  # Initialize the result variable
-    try:
-        if st.button("tan"):
-            result = trigonometry(num1, "tan")
-        if st.button("sqrt"):
-            result = square_root(num1)
-        if result is not None:
-            st.write(f"The result is:", result)
-    except Exception as e:
-        st.error(str(e))
-
-   with col3:
-    result = None  # Initialize the result variable
-    try:
+    with col3:
+     result = None  # Initialize the result variable
+     try:
         base = st.number_input("Enter the base for logarithm:", step=1.0)
         if st.button("log"):
             result = logarithm(num1, base)
         if result is not None:
             st.write(f"The logarithm of {num1} with base {base} is:", result)
-    except Exception as e:
-        st.error(str(e))
-        
+     except Exception as e:
+         st.error(str(e))
+         
 if __name__ == '__main__':
     app()
 
