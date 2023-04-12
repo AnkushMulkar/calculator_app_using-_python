@@ -122,4 +122,4 @@ with col3:
         st.error(str(e))
         
 if name == 'main':
-app()
+    app()
