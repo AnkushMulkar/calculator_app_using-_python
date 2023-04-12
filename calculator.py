@@ -15,7 +15,7 @@ def multiply(x, y):
 
 # Define a function for division
 def divide(x, y):
-    return x / y
+    return x / y if y != 0 else float('inf')
 
 # Define a function for exponentiation
 def power(x, y):
@@ -23,11 +23,17 @@ def power(x, y):
 
 # Define a function for taking square root
 def square_root(x):
-    return math.sqrt(x)
+    if x >= 0:
+        return math.sqrt(x)
+    else:
+        raise ValueError("Square root is not defined for negative numbers.")
 
 # Define a function for taking logarithm
 def logarithm(x, base):
-    return math.log(x, base)
+    if x > 0 and base > 0 and base != 1:
+        return math.log(x, base)
+    else:
+        raise ValueError("Logarithm is not defined for non-positive numbers or a base of 1.")
 
 # Define a function for taking trigonometric functions
 def trigonometry(x, function):
@@ -52,43 +58,69 @@ def app():
 
     # Perform arithmetic operations
     if st.button("Calculate"):
-        sum = add(num1, num2)
-        difference = subtract(num1, num2)
-        product = multiply(num1, num2)
-        quotient = divide(num1, num2)
-        power_result = power(num1, num2)
+        try:
+            sum = add(num1, num2)
+            difference = subtract(num1, num2)
+            product = multiply(num1, num2)
+            quotient = divide(num1, num2)
+            power_result = power(num1, num2)
 
-        # Print the results of arithmetic operations
-        st.write("The sum of the two numbers is:", sum)
-        st.write("The difference between the two numbers is:", difference)
-        st.write("The product of the two numbers is:", product)
-        st.write("The quotient of the two numbers is:", quotient)
-        st.write("The result of raising the first number to the power of the second number is:", power_result)
+            # Print the results of arithmetic operations
+            st.write("The sum of the two numbers is:", sum)
+            st.write("The difference between the two numbers is:", difference)
+            st.write("The product of the two numbers is:", product)
+            st.write("The quotient of the two numbers is:", quotient)
+            st.write("The result of raising the first number to the power of the second number is:", power_result)
+
+        except ZeroDivisionError:
+            st.error("Cannot divide by zero.")
+
+        except OverflowError:
+            st.error("The result is too large to display.")
+
+        except Exception as e:
+            st.error(str(e))
 
     # Add scientific calculator functions
     st.write("Scientific functions:")
     col1, col2, col3 = st.beta_columns(3)
     with col1:
-        if st.button("sin"):
-            result = trigonometry(num1, "sin")
-            st.write(f"The sine of {num1} is:", result)
-        if st.button("cos"):
-            result = trigonometry(num1, "cos")
-            st.write(f"The cosine of {num1} is:", result)
+        try:
+            if st.button("sin"):
+                result = trigonometry(num1, "sin")
+                st.write(f"The sine of {num1} is:", result)
+
+            if st.button("cos"):
+                result = trigonometry(num1, "cos")
+                st.write(f"The cosine of {num1} is:", result)
+
+        except Exception as e:
+            st.error(str(e))
+
     with col2:
-        if st.button("tan"):
-            result = trigonometry(num1, "tan")
-            st.write(f"The tangent of {num1} is:", result)
-        if st.button("sqrt"):
-            result = square_root(num1)
+        try:
+            if st.button("tan"):
+                result = trigonometry(num1, "tan")
+                st.write(f"The tangent of {num1} is:", result)
+
+            if st.button("sqrt"):
+                result = square_root(num1)
             st.write(f"The square root of {num1} is:", result)
-    with col3:
+
+    except Exception as e:
+        st.error(str(e))
+
+with col3:
+    try:
+        # Get input for logarithm base
         base = st.number_input("Enter the base for logarithm:", step=1.0)
+
         if st.button("log"):
             result = logarithm(num1, base)
             st.write(f"The logarithm of {num1} with base {base} is:", result)
-        st.write("Note: Logarithm function requires a base input.")
 
-# Run the app
-if __name__ == '__main__':
-    app()
+    except Exception as e:
+        st.error(str(e))
+        
+if name == 'main':
+app()
