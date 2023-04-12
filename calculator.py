@@ -109,16 +109,14 @@ def app():
         except Exception as e:
             st.error(str(e))
 
-with col3:
-    try:
-        # Get input for logarithm base
-        base = st.number_input("Enter the base for logarithm:", step=1.0)
-
-        if st.button("log"):
-            result = logarithm(num1, base)
+    with col3:
+        try:
+            base = st.number_input("Enter the base for logarithm:", step=1.0)
+            if st.button("log"):
+                result = logarithm(num1, base)
             st.write(f"The logarithm of {num1} with base {base} is:", result)
 
-    except Exception as e:
+        except Exception as e:
         st.error(str(e))
         
 if name == 'main':
