@@ -106,8 +106,7 @@ def app():
             if st.button("sqrt"):
                 result = square_root(num1)
             st.write(f"The square root of {num1} is:", result)
-
-    except Exception as e:
+        except Exception as e:
         st.error(str(e))
 
 with col3:
