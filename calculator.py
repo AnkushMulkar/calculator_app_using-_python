@@ -87,10 +87,12 @@ def app():
     with col1:
         try:
             if st.button("sin"):
+                result = None
                 result = trigonometry(num1, "sin")
                 st.write(f"The sine of {num1} is:", result)
 
             if st.button("cos"):
+                result = None
                 result = trigonometry(num1, "cos")
                 st.write(f"The cosine of {num1} is:", result)
 
@@ -100,10 +102,12 @@ def app():
     with col2:
         try:
             if st.button("tan"):
+                result = None
                 result = trigonometry(num1, "tan")
                 st.write(f"The tangent of {num1} is:", result)
 
             if st.button("sqrt"):
+                result = None
                 result = square_root(num1)
             st.write(f"The square root of {num1} is:", result)
         except Exception as e:
@@ -113,6 +117,7 @@ def app():
         try:
             base = st.number_input("Enter the base for logarithm:", step=1.0)
             if st.button("log"):
+                result = None
                 result = logarithm(num1, base)
             st.write(f"The logarithm of {num1} with base {base} is:", result)
 
