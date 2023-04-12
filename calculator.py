@@ -117,7 +117,7 @@ def app():
             st.write(f"The logarithm of {num1} with base {base} is:", result)
 
         except Exception as e:
-        st.error(str(e))
+            st.error(str(e))
         
 if name == 'main':
     app()
