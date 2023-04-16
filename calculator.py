@@ -10,8 +10,22 @@ def subtract(x, y):
     return x - y
 
 # Define a function for multiplication
+import decimal
+
 def multiply(x, y):
-    return x * y
+    # Set the precision to 100 decimal places
+    decimal.getcontext().prec = 100
+    # Convert the input numbers to decimal.Decimal objects
+    x = decimal.Decimal(x)
+    y = decimal.Decimal(y)
+    # Perform the multiplication operation
+    result = x * y
+    # Convert the result back to float if it is within the representable range of float
+    if float(result) != float('inf'):
+        return float(result)
+    else:
+        raise OverflowError("The result is too large to display.")
+
 
 # Define a function for division
 def divide(x, y):
@@ -19,7 +33,11 @@ def divide(x, y):
 
 # Define a function for exponentiation
 def power(x, y):
-    return x ** y
+    result = x ** y
+    if abs(result) > 1e10:
+        return f"{result:.2e}"
+    else:
+        return result
 
 # Define a function for taking square root
 def square_root(x):
