@@ -2,7 +2,7 @@ import math
 import streamlit as st
 
 # Set page title and icon
-st.set_page_config(page_title="Calculator", page_icon=":1234:")
+st.set_page_config(page_title="Calculator")
 
 # Define function to perform basic arithmetic operations
 def calculate(num1, num2, operation):
