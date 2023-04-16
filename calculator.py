@@ -104,7 +104,7 @@ def app():
             if st.button("sqrt"):
                 result = square_root(num1)
             if isinstance(result, str):
-             try:
+        try:
         if st.button("cos"):
             result = trigonometry(num1, "cos")
             st.write(f"The cosine of {num1} is:", result)
@@ -128,3 +128,4 @@ with col3:
         st.error(str(e))
 if name == "main":
 app()      
+        
