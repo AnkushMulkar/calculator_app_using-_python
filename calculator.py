@@ -39,8 +39,8 @@ def main():
     st.title("Calculator")
     
     # Create input fields for numbers and operations
-    num1 = st.number_input("Enter first number:")
-    num2 = st.number_input("Enter second number:")
+    num1 = st.number_input("Enter first number:", value=0.0, step=1.0)
+    num2 = st.number_input("Enter second number:", value=0.0, step=1.0)
     operation = st.selectbox("Select operation:", ["+", "-", "*", "/", "sin", "cos", "tan"])
     
     # Create digit buttons
