@@ -10,16 +10,12 @@ def subtract(x, y):
     return x - y
 
 # Define a function for multiplication
-import decimal
-
-# Define a function for multiplication
 def multiply(x, y):
     product = x * y
     if abs(product) > 10 ** 100:
-        raise OverflowError("The result is too large to display.")
+        return "The result is too large to display."
     else:
         return product
-
 
 # Define a function for division
 def divide(x, y):
@@ -87,9 +83,6 @@ def app():
         except ZeroDivisionError:
             st.error("Cannot divide by zero.")
 
-        except OverflowError:
-            st.error("The result is too large to display.")
-
         except Exception as e:
             st.error(str(e))
 
@@ -97,38 +90,41 @@ def app():
     st.write("Scientific functions:")
     col1, col2, col3 = st.columns(3)
     with col1:
-     result = None  # Initialize the result variable
-     try:
-         if st.button("sin"):
-             result = trigonometry(num1, "sin")
-         if result is not None:
-             st.write(f"The sine of {num1} is:", result)
-     except Exception as e:
-         st.error(str(e))
+        try:
+            if st.button("sin"):
+                result = trigonometry(num1, "sin")
+                st.write(f"The sine of {num1} is:", result)
+        except Exception as e:
+            st.error(str(e))
  
     with col2:
-     result = None  # Initialize the result variable
-     try:
-         if st.button("tan"):
-             result = trigonometry(num1, "tan")
-         if st.button("sqrt"):
-             result = square_root(num1)
-         if result is not None:
-             st.write(f"The result is:", result)
-     except Exception as e:
-         st.error(str(e))
+        try:
+            if st.button("tan"):
+                result = trigonometry(num1, "tan")
+            if st.button("sqrt"):
+                result = square_root(num1)
+            if isinstance(result, str):
+             try:
+        if st.button("cos"):
+            result = trigonometry(num1, "cos")
+            st.write(f"The cosine of {num1} is:", result)
+    except Exception as e:
+        st.error(str(e))
 
-    with col3:
-     result = None  # Initialize the result variable
-     try:
-        base = st.number_input("Enter the base for logarithm:", step=1.0)
+with col3:
+    try:
+        if st.button("sqrt"):
+            result = square_root(num1)
+            st.write(f"The square root of {num1} is:", result)
+    except Exception as e:
+        st.error(str(e))
+
+    try:
         if st.button("log"):
+            base = st.number_input("Enter the base of the logarithm:", step=1.0)
             result = logarithm(num1, base)
-        if result is not None:
             st.write(f"The logarithm of {num1} with base {base} is:", result)
-     except Exception as e:
-         st.error(str(e))
-         
-if __name__ == '__main__':
-    app()
-
+    except Exception as e:
+        st.error(str(e))
+if name == "main":
+app()      
