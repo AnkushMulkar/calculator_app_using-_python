@@ -66,3 +66,5 @@ else:
 
     # Display result
     st.write("Result:", result)
+    st.write("Created by [Ankush Mulkar](https://www.linkedin.com/in/ankush-mulkar-ab539454/)")
+
