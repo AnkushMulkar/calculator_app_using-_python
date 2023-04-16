@@ -12,19 +12,13 @@ def subtract(x, y):
 # Define a function for multiplication
 import decimal
 
+# Define a function for multiplication
 def multiply(x, y):
-    # Set the precision to 100 decimal places
-    decimal.getcontext().prec = 100
-    # Convert the input numbers to decimal.Decimal objects
-    x = decimal.Decimal(x)
-    y = decimal.Decimal(y)
-    # Perform the multiplication operation
-    result = x * y
-    # Convert the result back to float if it is within the representable range of float
-    if float(result) != float('inf'):
-        return float(result)
-    else:
+    product = x * y
+    if abs(product) > 10 ** 100:
         raise OverflowError("The result is too large to display.")
+    else:
+        return product
 
 
 # Define a function for division
