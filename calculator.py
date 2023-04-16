@@ -1,131 +1,56 @@
-import streamlit as st
 import math
+import streamlit as st
 
-# Define a function for addition
-def add(x, y):
-    return x + y
+# Set page title and icon
+st.set_page_config(page_title="Calculator", page_icon=":1234:")
 
-# Define a function for subtraction
-def subtract(x, y):
-    return x - y
+# Define function to perform basic arithmetic operations
+def calculate(num1, num2, operation):
+    if operation == "+":
+        return num1 + num2
+    elif operation == "-":
+        return num1 - num2
+    elif operation == "*":
+        return num1 * num2
+    elif operation == "/":
+        if num2 == 0:
+            return "Cannot divide by zero"
+        else:
+            return num1 / num2
 
-# Define a function for multiplication
-def multiply(x, y):
-    product = x * y
-    if abs(product) > 10 ** 100:
-        return "The result is too large to display."
-    else:
-        return product
+# Define function to perform trigonometric operations
+def calculate_trig(num, operation):
+    if operation == "sin":
+        return math.sin(num)
+    elif operation == "cos":
+        return math.cos(num)
+    elif operation == "tan":
+        return math.tan(num)
 
-# Define a function for division
-def divide(x, y):
-    return x / y if y != 0 else float('inf')
-
-# Define a function for exponentiation
-def power(x, y):
-    result = x ** y
-    if abs(result) > 1e10:
-        return f"{result:.2e}"
+# Define function to format large results
+def format_result(result):
+    if result > 1000000 or result < -1000000:
+        return "{:.2e}".format(result)
     else:
         return result
 
-# Define a function for taking square root
-def square_root(x):
-    if x >= 0:
-        return math.sqrt(x)
-    else:
-        raise ValueError("Square root is not defined for negative numbers.")
+# Define main function
+def main():
+    st.title("Calculator")
+    
+    # Create input fields for numbers and operations
+    num1 = st.number_input("Enter first number:")
+    num2 = st.number_input("Enter second number:")
+    operation = st.selectbox("Select operation:", ["+", "-", "*", "/", "sin", "cos", "tan"])
+    
+    # Perform calculation and display result
+    if operation in ["+", "-", "*", "/"]:
+        result = calculate(num1, num2, operation)
+        st.write("Result:", format_result(result))
+    elif operation in ["sin", "cos", "tan"]:
+        result = calculate_trig(num1, operation)
+        st.write("Result:", format_result(result))
 
-# Define a function for taking logarithm
-def logarithm(x, base):
-    if x > 0 and base > 0 and base != 1:
-        return math.log(x, base)
-    else:
-        raise ValueError("Logarithm is not defined for non-positive numbers or a base of 1.")
-
-# Define a function for taking trigonometric functions
-def trigonometry(x, function):
-    if function == "sin":
-        return math.sin(x)
-    elif function == "cos":
-        return math.cos(x)
-    elif function == "tan":
-        return math.tan(x)
-    else:
-        return None
-
-# Create a Streamlit app
-def app():
-    # Print a welcome message and instructions
-    st.title("Scientific Calculator")
-    st.write("Please enter two numbers to perform arithmetic operations or use the scientific functions below.")
-
-    # Get input from the user
-    num1 = st.number_input("Enter the first number:", step=1.0)
-    num2 = st.number_input("Enter the second number:", step=1.0)
-
-    # Perform arithmetic operations
-    if st.button("Calculate"):
-        try:
-            sum = add(num1, num2)
-            difference = subtract(num1, num2)
-            product = multiply(num1, num2)
-            quotient = divide(num1, num2)
-            power_result = power(num1, num2)
-
-            # Print the results of arithmetic operations
-            st.write("The sum of the two numbers is:", sum)
-            st.write("The difference between the two numbers is:", difference)
-            st.write("The product of the two numbers is:", product)
-            st.write("The quotient of the two numbers is:", quotient)
-            st.write("The result of raising the first number to the power of the second number is:", power_result)
-
-        except ZeroDivisionError:
-            st.error("Cannot divide by zero.")
-
-        except Exception as e:
-            st.error(str(e))
-
-    # Add scientific calculator functions
-    st.write("Scientific functions:")
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        try:
-            if st.button("sin"):
-                result = trigonometry(num1, "sin")
-                st.write(f"The sine of {num1} is:", result)
-        except Exception as e:
-            st.error(str(e))
- 
-    with col2:
-        try:
-            if st.button("tan"):
-                result = trigonometry(num1, "tan")
-            if st.button("sqrt"):
-                result = square_root(num1)
-            if isinstance(result, str):
-        try:
-        if st.button("cos"):
-            result = trigonometry(num1, "cos")
-            st.write(f"The cosine of {num1} is:", result)
-    except Exception as e:
-        st.error(str(e))
-
-with col3:
-    try:
-        if st.button("sqrt"):
-            result = square_root(num1)
-            st.write(f"The square root of {num1} is:", result)
-    except Exception as e:
-        st.error(str(e))
-
-    try:
-        if st.button("log"):
-            base = st.number_input("Enter the base of the logarithm:", step=1.0)
-            result = logarithm(num1, base)
-            st.write(f"The logarithm of {num1} with base {base} is:", result)
-    except Exception as e:
-        st.error(str(e))
-if name == "main":
-app()      
-        
+# Run the app
+if __name__ == "__main__":
+    main()
